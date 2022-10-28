@@ -2,37 +2,47 @@ from pythonosc.dispatcher import Dispatcher
 
 import pyautogui as p 
 from time import sleep
-from typing import List, Any
 
-open = False
+# class Ableton(object):
+#     def __init__(self,self.open):
+#         self.open = False
 
+#     def opened(self):
+#         self.open = True
+# ableton = Ableton()
+opened = False
 def openAbleton():
     p.keyDown("command")
     p.press('space')
     p.keyUp("command")
     p.write('ableton')
     p.press('enter')
-    return True
+    global opened
+    opened = True
+    return opened
+
+    
+
 
 def playSound(key, wait):
-    if not open:
-        open = openAbleton()
+    global opened
+    if opened == False:
+        opened = openAbleton()
+
+    key = str(key)
+    p.keyDown(key)
+    print(f"{key} pressed")
+    sleep(wait)
+    
 
 def mapSound(address: str, *args):
     
-    # key = str(args[0])
-    # wait = args[1]
-    # p.keyDown(key)
-    # print(f"{key} pressed")
-    # sleep(wait)
-    # message_value
     index = address[-1]
-    print(f"{index} is the index")
-    value = args
-    # if value > 0:
-    #     playSound
-    print(args)
-    print(address)
+
+    value = args[0]
+    if value > 0:
+        playSound(index,1)
+    
 
 def print_handler(address, *args):
     print(f"{address}: {args}")
@@ -43,6 +53,6 @@ def print_handler(address, *args):
 dispatcher = Dispatcher()
 
 #play sound 1 for 1 second
-dispatcher.map("/sound/2", mapSound,1)
+dispatcher.map("/sound/*", mapSound)
 
 # dispatcher.set_default_handler(default_handler)

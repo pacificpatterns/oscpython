@@ -1,5 +1,6 @@
 import pyautogui as p 
 from time import sleep
+from typing import List, Any
 
 open = False
 
@@ -11,8 +12,12 @@ def openAbleton():
     p.press('enter')
     open = True
 
-def playSound(key, wait):
-    p.keyDown(str(key))
+def playSound(address: str, *args List[Any]):
+    if !open:
+        openAbleton()
+    key = str(args[0])
+    wait = args[1]
+    p.keyDown(key)
     print(f"{key} pressed")
     sleep(wait)
 
