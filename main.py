@@ -1,7 +1,14 @@
 import abletonKeyFunctions as akf
+import blockingserver
+from pythonosc.osc_server import BlockingOSCUDPServer
+from dispatchermapping import dispatcher, open
 
+print(open)
 akf.openAbleton()
+print(open)
 
-for i in range(2):
-    akf.playSound(1, 1)
+# ip = "0.0.0.0"
+# port = 1337
 
+# server = BlockingOSCUDPServer((ip, port), dispatcher)
+# server.serve_forever()  # Blocks forever
