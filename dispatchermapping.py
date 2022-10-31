@@ -41,7 +41,7 @@ def mapSound(address: str, *args):
 
     value = args[0]
     if value > 0:
-        playSound(index,1)
+        playSound(index,0.005)
     
 
 def print_handler(address, *args):
