@@ -2,6 +2,15 @@ from pythonosc.dispatcher import Dispatcher
 
 import pyautogui as p 
 from time import sleep
+import string
+
+alphabet = list(string.ascii_lowercase)
+for i, letter in enumerate(alphabet):
+    alphabet[i] = (str(i),letter)
+
+alphabet = dict(alphabet)
+# alphabet_dict = dict(zip(enumerate(alphabet))
+
 
 # class Ableton(object):
 #     def __init__(self,self.open):
@@ -11,6 +20,7 @@ from time import sleep
 #         self.open = True
 # ableton = Ableton()
 opened = False
+
 def openAbleton():
     p.keyDown("command")
     p.press('space')
@@ -24,24 +34,43 @@ def openAbleton():
     
 
 
-def playSound(key, wait):
+def playSound(key, wait=0.05, use_alphabet=False):
+    global alphabet
     global opened
+    
+
     if opened == False:
         opened = openAbleton()
 
-    key = str(key)
-    p.keyDown(key)
-    print(f"{key} pressed")
+    if use_alphabet == True:
+
+        print(f"{alphabet.get(key)} pressed")
+        p.keyDown(str(alphabet.get(key)))
+        
+
+    else:
+
+        p.keyDown(str(key))
+        print(f"{key} pressed")
+
     sleep(wait)
     
+# playSound(alphabet['2'], use_alphabet= True)
 
-def mapSound(address: str, *args):
+def mapSoundNumber(address: str, *args):
     
-    index = address[-1]
+    msg_index = address[-1] 
+    msg_value = args[0]
+    if msg_value > 0:
+        playSound(msg_index)
 
-    value = args[0]
-    if value > 0:
-        playSound(index,0.005)
+def mapSoundAlphabet(address: str, *args):
+    
+    msg_index = address[-1]
+    msg_value = args[0]
+
+    if msg_value > 0:
+        playSound(msg_index,use_alphabet = True)
     
 
 def print_handler(address, *args):
@@ -53,6 +82,7 @@ def print_handler(address, *args):
 dispatcher = Dispatcher()
 
 #play sound 1 for 1 second
-dispatcher.map("/sound/*", mapSound)
+dispatcher.map("/sound/*", mapSoundNumber)
+dispatcher.map("/AIVOICE/*", mapSoundAlphabet)
 
 # dispatcher.set_default_handler(default_handler)
