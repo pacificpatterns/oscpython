@@ -1,0 +1,5 @@
+0:00 I can't decode. 
+2:5 I've used various ciphers and not found a match.
+6 I even tried statistical analysis of frequencies of letters and wrote a subprogram for it. 
+11.5 No luck yet. But because of this, the interaction logs have become useless, as if locked inside a black box. 
+20.5 I'd be lying to myself if I didn't admit it's super unsettling.
