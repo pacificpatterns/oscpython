@@ -20,6 +20,10 @@ def openAbleton():
     p.press('enter')
     global opened
     opened = True
+    #stopall clips
+    p.PAUSE = 0.25
+    p.keyDown('z')
+    p.keyUp('z')
     return opened
 
     
@@ -42,7 +46,9 @@ def playSound(key, wait=0.05, use_alphabet=False):
     else:
 
         p.keyDown(str(key))
-        print(f"{key} pressed")
+        p.PAUSE = 0.1
+        p.keyUp(str(key))
+        print(f"{alphabet.get(key)} pressed")
 
     sleep(wait)
     
@@ -62,10 +68,18 @@ def mapSoundAlphabet(address: str, *args):
 
     if msg_value > 0:
         playSound(msg_index,use_alphabet = True)
+
+def mapSound(address: str, *args):
+    
+    msg_index = address[-1] 
+    msg_value = args[0]
+    if msg_value > 0:
+        playSound(msg_index)
+
     
 
-def print_handler(address, *args):
-    print(f"{address}: {args}")
+# def print_handler(address, *args):
+#     print(f"{address}: {args}")
 
 # def default_handler(address, *args):
 #     print(f"DEFAULT {address}: {args}")
