@@ -5,8 +5,10 @@ from time import sleep
 import string
 
 alphabet = list(string.ascii_lowercase)
+
 for i, letter in enumerate(alphabet):
     alphabet[i] = (str(i),letter)
+print(alphabet)
 
 alphabet = dict(alphabet)
 
@@ -81,8 +83,8 @@ def mapSound(address: str, *args):
 # def print_handler(address, *args):
 #     print(f"{address}: {args}")
 
-# def default_handler(address, *args):
-#     print(f"DEFAULT {address}: {args}")
+def default_handler(address, *args):
+    print(f"DEFAULT {address}: {args}")
 
 dispatcher = Dispatcher()
 

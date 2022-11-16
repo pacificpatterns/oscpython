@@ -24,7 +24,7 @@ system settings/network/advanced/tcpip
 
 Get Mac IP upon set up
 
-Configure Routing When Audio Interfae has been connected
+Configure Routing When Audio Interface has been connected
     Audio Midi Setup
     Window ->Show Midi
     Click IAC driver

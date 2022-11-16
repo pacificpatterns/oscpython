@@ -3,7 +3,7 @@ from pythonosc.osc_server import BlockingOSCUDPServer
 from dispatchermapping import dispatcher
 
 ip = "0.0.0.0"
-port = 1338
+port = 1339
 
 
 server = BlockingOSCUDPServer((ip, port), dispatcher)
